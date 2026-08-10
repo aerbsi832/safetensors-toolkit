@@ -1,0 +1,279 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/model"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+pub(all) suberror SftkError {
+  Truncated(phase~ : String, expected~ : UInt64, actual~ : UInt64)
+  HeaderTooLarge(length~ : UInt64, limit~ : UInt64)
+  InvalidUtf8(offset~ : UInt64)
+  InvalidJson(offset~ : UInt64, message~ : String)
+  DuplicateKey(path~ : String, key~ : String)
+  InvalidTensor(name~ : String, message~ : String)
+  UnknownDtype(name~ : String, dtype~ : String)
+  ArithmeticOverflow(context~ : String)
+  InvalidLayout(message~ : String)
+  InvalidIndex(message~ : String)
+  IoFailure(operation~ : String, path~ : String, message~ : String)
+  Conflict(path~ : String, message~ : String)
+  InvalidOptions(message~ : String)
+} derive(Eq, @debug.Debug)
+
+// Types and methods
+pub(all) struct DiffEntry {
+  kind : DiffKind
+  name : String
+  before : String?
+  after : String?
+} derive(Eq, @debug.Debug)
+
+pub(all) enum DiffKind {
+  TensorAdded
+  TensorRemoved
+  DtypeChanged
+  ShapeChanged
+  DataRangeChanged
+  MetadataAdded
+  MetadataRemoved
+  MetadataChanged
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DiffReport {
+  entries : Array[DiffEntry]
+  equal : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) enum Dtype {
+  BOOL
+  U8
+  I8
+  F4
+  F6_E2M3
+  F6_E3M2
+  F8_E5M2
+  F8_E4M3
+  F8_E8M0
+  F8_E4M3FNUZ
+  F8_E5M2FNUZ
+  U16
+  I16
+  F16
+  BF16
+  U32
+  I32
+  F32
+  C64
+  U64
+  I64
+  F64
+} derive(Eq, @debug.Debug)
+pub fn Dtype::bit_width(Self) -> UInt64
+pub fn Dtype::name(Self) -> String
+pub fn Dtype::parse(String) -> Self?
+
+pub(all) struct DtypeSummary {
+  dtype : Dtype
+  tensor_count : Int
+  element_count : UInt64
+  byte_count : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ExecutionOptions {
+  buffer_bytes : Int
+  overwrite : Bool
+  follow_symlinks : Bool
+} derive(Eq, @debug.Debug)
+pub fn ExecutionOptions::default() -> Self
+
+pub(all) struct FileInfo {
+  tensor_count : Int
+  metadata_count : Int
+  data_bytes : UInt64
+  dtype_counts : Array[(String, Int)]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct HeaderSnapshot {
+  tensors : Array[TensorInfo]
+  metadata : Array[MetadataEntry]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct LayoutSummary {
+  tensor_count : Int
+  scalar_count : Int
+  max_rank : Int
+  total_elements : UInt64
+  total_bytes : UInt64
+  dtype_summaries : Array[DtypeSummary]
+  largest_tensor : TensorMatch?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MergeEntry {
+  name : String
+  shard_name : String
+  source_start : UInt64
+  source_end : UInt64
+  output_start : UInt64
+  output_end : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MergePlan {
+  entries : Array[MergeEntry]
+  output_data_bytes : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetadataEntry {
+  key : String
+  value : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetadataIssue {
+  key : String?
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct MetadataPolicy {
+  required_keys : Array[String]
+  forbidden_keys : Array[String]
+  max_value_bytes : Int
+  allow_empty_values : Bool
+} derive(Eq, @debug.Debug)
+pub fn MetadataPolicy::default() -> Self
+
+pub(all) struct MetadataValidation {
+  issues : Array[MetadataIssue]
+  valid : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ParseLimits {
+  max_header_bytes : UInt64
+  max_tensors : Int
+  max_metadata_entries : Int
+  max_depth : Int
+  max_string_bytes : Int
+} derive(Eq, @debug.Debug)
+pub fn ParseLimits::default() -> Self
+
+pub(all) struct PlannedShard {
+  name : String
+  tensors : Array[PlannedTensor]
+  data_bytes : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PlannedTensor {
+  name : String
+  source_start : UInt64
+  source_end : UInt64
+  output_start : UInt64
+  output_end : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct RenamePlan {
+  renames : Array[TensorRename]
+  changed : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ShardIndex {
+  format : String
+  total_size : UInt64
+  weight_map : Array[(String, String)]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ShardPlan {
+  source_data_bytes : UInt64
+  source_tensor_count : Int
+  shards : Array[PlannedShard]
+  index : ShardIndex
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ShardPolicy {
+  max_bytes : UInt64
+  max_tensors : Int
+} derive(Eq, @debug.Debug)
+pub fn ShardPolicy::new(UInt64, Int) -> Self raise SftkError
+
+pub(all) struct ShardSetIssue {
+  shard_name : String?
+  tensor_name : String?
+  message : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ShardSetValidation {
+  issues : Array[ShardSetIssue]
+  total_data_bytes : UInt64
+  valid : Bool
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ShardSummary {
+  name : String
+  tensor_count : Int
+  data_bytes : UInt64
+  min_tensor_bytes : UInt64
+  max_tensor_bytes : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct SplitSummary {
+  shard_count : Int
+  data_bytes : UInt64
+  largest_shard_bytes : UInt64
+  smallest_shard_bytes : UInt64
+  shards : Array[ShardSummary]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TensorInfo {
+  name : String
+  dtype : Dtype
+  shape : Array[UInt64]
+  data_start : UInt64
+  data_end : UInt64
+  source_order : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TensorMatch {
+  tensor : TensorInfo
+  element_count : UInt64
+  byte_count : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TensorNameMatch {
+  AnyName
+  ExactName(value~ : String)
+  Prefix(value~ : String)
+  Suffix(value~ : String)
+  Contains(value~ : String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TensorQuery {
+  name_match : TensorNameMatch
+  dtypes : Array[Dtype]
+  rank : Int?
+  min_bytes : UInt64?
+  max_bytes : UInt64?
+  require_metadata_key : String?
+} derive(Eq, @debug.Debug)
+pub fn TensorQuery::all() -> Self
+
+pub(all) struct TensorQueryResult {
+  matches : Array[TensorMatch]
+  total_elements : UInt64
+  total_bytes : UInt64
+} derive(Eq, @debug.Debug)
+
+pub(all) struct TensorRename {
+  from : String
+  to : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct ValidatedFile {
+  header : HeaderSnapshot
+  data_len : UInt64
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+
