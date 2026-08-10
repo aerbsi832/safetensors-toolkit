@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/codec"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub fn decode_header_length(Bytes, limits~ : @model.ParseLimits) -> UInt64 raise @model.SftkError
+
+pub fn encode_header(@model.ValidatedFile) -> Bytes
+
+pub fn encode_shard_index(@model.ShardIndex) -> Bytes
+
+pub fn inspect(@model.ValidatedFile) -> @model.FileInfo
+
+pub fn parse_header(Bytes, limits~ : @model.ParseLimits) -> @model.HeaderSnapshot raise @model.SftkError
+
+pub fn parse_shard_index(Bytes, limits~ : @model.ParseLimits) -> @model.ShardIndex raise @model.SftkError
+
+pub fn tensor_element_count(@model.TensorInfo) -> UInt64 raise @model.SftkError
+
+pub fn tensor_storage_bytes(@model.TensorInfo) -> UInt64 raise @model.SftkError
+
+pub fn validate_layout(@model.HeaderSnapshot, data_len~ : UInt64) -> @model.ValidatedFile raise @model.SftkError
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
