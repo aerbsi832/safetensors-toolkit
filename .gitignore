@@ -1,0 +1,5 @@
+/_build/
+/.mooncakes/
+*.safetensors
+*.safetensors.index.json
+*.tmp

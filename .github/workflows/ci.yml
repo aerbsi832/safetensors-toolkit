@@ -1,0 +1,22 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  moonbit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hustcer/setup-moonbit@v1.23
+        with:
+          version: 0.10.4+2cc641edf
+      - run: moon update
+      - run: moon fmt --check
+      - run: moon check --target all --deny-warn
+      - run: moon build --target all --deny-warn
+      - run: moon test --target all --deny-warn
+      - run: bash scripts/cli_e2e.sh
+      - run: moon info
+      - run: git diff --exit-code
