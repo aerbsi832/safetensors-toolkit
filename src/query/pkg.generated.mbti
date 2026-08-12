@@ -1,0 +1,28 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/query"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub fn find_tensor(@model.ValidatedFile, String) -> @model.TensorMatch? raise @model.SftkError
+
+pub fn metadata_value(@model.ValidatedFile, String) -> String?
+
+pub fn parse_selector(String) -> @model.TensorQuery raise @model.SftkError
+
+pub fn query_tensors(@model.ValidatedFile, @model.TensorQuery) -> @model.TensorQueryResult raise @model.SftkError
+
+pub fn render_selector(@model.TensorQuery) -> String
+
+pub fn tensor_names(@model.ValidatedFile) -> Array[String]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
