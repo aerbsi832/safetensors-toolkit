@@ -1,0 +1,18 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/diff"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub fn diff(@model.ValidatedFile, @model.ValidatedFile) -> @model.DiffReport
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
