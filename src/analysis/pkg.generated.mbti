@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/analysis"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub fn count_dtype(@model.ValidatedFile, @model.Dtype) -> Int
+
+pub fn has_shard_set_issues(@model.ShardSetValidation) -> Bool
+
+pub fn indexed_shard_names(@model.ShardIndex) -> Array[String]
+
+pub fn largest_tensor(@model.ValidatedFile) -> @model.TensorMatch? raise @model.SftkError
+
+pub fn metadata_keys(@model.ValidatedFile) -> Array[String]
+
+pub fn missing_indexed_tensors(@model.ShardIndex, ArrayView[(String, @model.ValidatedFile)]) -> Array[String]
+
+pub fn policy_is_consistent(@model.MetadataPolicy) -> Bool
+
+pub fn summarize_layout(@model.ValidatedFile) -> @model.LayoutSummary raise @model.SftkError
+
+pub fn validate_metadata(@model.ValidatedFile, @model.MetadataPolicy) -> @model.MetadataValidation raise @model.SftkError
+
+pub fn validate_shard_set(@model.ShardIndex, ArrayView[(String, @model.ValidatedFile)]) -> @model.ShardSetValidation
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
