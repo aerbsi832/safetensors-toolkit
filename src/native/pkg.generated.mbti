@@ -1,0 +1,28 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/native"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub async fn execute_merge(ArrayView[String], String, @model.MergePlan, @model.ExecutionOptions) -> Unit raise @model.SftkError
+
+pub async fn execute_rename(String, String, @model.RenamePlan, @model.ExecutionOptions) -> Unit raise @model.SftkError
+
+pub async fn execute_split(String, String, @model.ShardPlan, @model.ExecutionOptions) -> Unit raise @model.SftkError
+
+pub async fn inspect_file(String, @model.ParseLimits) -> @model.ValidatedFile raise @model.SftkError
+
+pub async fn load_index_file(String, @model.ParseLimits) -> @model.ShardIndex raise @model.SftkError
+
+pub async fn plan_prefix_rename_file(String, String, String, @model.ExecutionOptions) -> @model.RenamePlan raise @model.SftkError
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

@@ -1,0 +1,18 @@
+import {
+  "aerbsi832/safetensors-toolkit/codec",
+  "aerbsi832/safetensors-toolkit/model",
+  "aerbsi832/safetensors-toolkit/transform",
+  "moonbitlang/async/fs",
+  "moonbitlang/async/io",
+}
+
+import {
+  "aerbsi832/safetensors-toolkit/shard",
+  "moonbitlang/async",
+} for "test"
+
+import {
+  "moonbitlang/async",
+} for "wbtest"
+
+supported_targets = "native"
