@@ -1,0 +1,3 @@
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}

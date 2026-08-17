@@ -1,0 +1,24 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit/transform"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub fn apply_rename_plan(@model.ValidatedFile, @model.RenamePlan) -> @model.ValidatedFile raise @model.SftkError
+
+pub fn plan_prefix_rename(@model.ValidatedFile, String, String) -> @model.RenamePlan raise @model.SftkError
+
+pub fn plan_renames(@model.ValidatedFile, ArrayView[@model.TensorRename]) -> @model.RenamePlan raise @model.SftkError
+
+pub fn renamed_tensor_names(@model.ValidatedFile, @model.RenamePlan) -> Array[String] raise @model.SftkError
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+
