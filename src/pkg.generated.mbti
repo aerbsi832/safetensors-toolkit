@@ -1,0 +1,109 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "aerbsi832/safetensors-toolkit"
+
+import {
+  "aerbsi832/safetensors-toolkit/model",
+}
+
+// Values
+pub fn apply_rename_plan(@model.ValidatedFile, @model.RenamePlan) -> @model.ValidatedFile raise @model.SftkError
+
+pub fn diff_files(@model.ValidatedFile, @model.ValidatedFile) -> @model.DiffReport
+
+pub fn find_tensor(@model.ValidatedFile, String) -> @model.TensorMatch? raise @model.SftkError
+
+pub fn inspect(@model.ValidatedFile) -> @model.FileInfo
+
+pub fn parse_and_validate(Bytes, data_len~ : UInt64, limits~ : @model.ParseLimits) -> @model.ValidatedFile raise @model.SftkError
+
+pub fn plan_merge(@model.ShardIndex, ArrayView[@model.ValidatedFile]) -> @model.MergePlan raise @model.SftkError
+
+pub fn plan_renames(@model.ValidatedFile, ArrayView[@model.TensorRename]) -> @model.RenamePlan raise @model.SftkError
+
+pub fn plan_split(@model.ValidatedFile, @model.ShardPolicy) -> @model.ShardPlan raise @model.SftkError
+
+pub fn query_tensors(@model.ValidatedFile, @model.TensorQuery) -> @model.TensorQueryResult raise @model.SftkError
+
+pub fn summarize_layout(@model.ValidatedFile) -> @model.LayoutSummary raise @model.SftkError
+
+pub fn summarize_split(@model.ShardPlan) -> @model.SplitSummary
+
+pub fn validate_metadata(@model.ValidatedFile, @model.MetadataPolicy) -> @model.MetadataValidation raise @model.SftkError
+
+pub fn validate_shard_set(@model.ShardIndex, ArrayView[(String, @model.ValidatedFile)]) -> @model.ShardSetValidation
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub using @model {type DiffEntry}
+
+pub using @model {type DiffKind}
+
+pub using @model {type DiffReport}
+
+pub using @model {type Dtype}
+
+pub using @model {type DtypeSummary}
+
+pub using @model {type ExecutionOptions}
+
+pub using @model {type FileInfo}
+
+pub using @model {type HeaderSnapshot}
+
+pub using @model {type LayoutSummary}
+
+pub using @model {type MergeEntry}
+
+pub using @model {type MergePlan}
+
+pub using @model {type MetadataEntry}
+
+pub using @model {type MetadataIssue}
+
+pub using @model {type MetadataPolicy}
+
+pub using @model {type MetadataValidation}
+
+pub using @model {type ParseLimits}
+
+pub using @model {type PlannedShard}
+
+pub using @model {type PlannedTensor}
+
+pub using @model {type RenamePlan}
+
+pub using @model {type SftkError}
+
+pub using @model {type ShardIndex}
+
+pub using @model {type ShardPlan}
+
+pub using @model {type ShardPolicy}
+
+pub using @model {type ShardSetIssue}
+
+pub using @model {type ShardSetValidation}
+
+pub using @model {type ShardSummary}
+
+pub using @model {type SplitSummary}
+
+pub using @model {type TensorInfo}
+
+pub using @model {type TensorMatch}
+
+pub using @model {type TensorNameMatch}
+
+pub using @model {type TensorQuery}
+
+pub using @model {type TensorQueryResult}
+
+pub using @model {type TensorRename}
+
+pub using @model {type ValidatedFile}
+
+// Traits
+
