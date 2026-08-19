@@ -1,0 +1,20 @@
+import {
+  "aerbsi832/safetensors-toolkit/diff",
+  "aerbsi832/safetensors-toolkit/codec",
+  "aerbsi832/safetensors-toolkit/model",
+  "aerbsi832/safetensors-toolkit/native",
+  "aerbsi832/safetensors-toolkit/query",
+  "aerbsi832/safetensors-toolkit/shard",
+  "moonbitlang/async",
+  "moonbitlang/core/encoding/utf8",
+  "moonbitlang/core/env",
+  "moonbitlang/x/sys",
+}
+
+pkgtype(kind: "executable")
+
+supported_targets = "native"
+
+options(
+  "native-stub": [ "stderr.c" ],
+)
