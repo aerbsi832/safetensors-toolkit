@@ -1,0 +1,10 @@
+import {
+  "aerbsi832/safetensors-toolkit/model",
+  "aerbsi832/safetensors-toolkit/native",
+  "moonbitlang/async",
+  "moonbitlang/core/env",
+}
+
+pkgtype(kind: "executable")
+
+supported_targets = "native"
