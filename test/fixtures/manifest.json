@@ -1,0 +1,9 @@
+{
+  "tiny_u8.safetensors": {
+    "encoding": "hex",
+    "bytes": 106,
+    "sha256": "e4e4fcacec662f078e53191ea0346ecf25b63f5944c296205f09223e29fe8a5b",
+    "generator": "original deterministic header + ASCII abc",
+    "license": "Apache-2.0 project fixture"
+  }
+}
