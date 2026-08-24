@@ -3,6 +3,10 @@ name: ci
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   moonbit:
@@ -12,11 +16,16 @@ jobs:
       - uses: hustcer/setup-moonbit@v1.23
         with:
           version: 0.10.4+2cc641edf
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
       - run: moon update
       - run: moon fmt --check
       - run: moon check --target all --deny-warn
       - run: moon build --target all --deny-warn
       - run: moon test --target all --deny-warn
       - run: bash scripts/cli_e2e.sh
+      - run: python3 -m pip install --disable-pip-version-check "numpy==2.2.6" "safetensors==0.6.2"
+      - run: PYTHON_BIN=python3 bash scripts/python_interop.sh
       - run: moon info
       - run: git diff --exit-code
