@@ -1,5 +1,7 @@
 name = "aerbsi832/safetensors-toolkit"
 
+repository = "https://github.com/aerbsi832/safetensors-toolkit"
+
 version = "0.1.0"
 
 readme = "README.md"
