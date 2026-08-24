@@ -4,26 +4,21 @@ async fn verify_renamed_output(
   expected : @model.ValidatedFile,
 ) -> Unit raise @model.SftkError {
   let observed = inspect_file(path, @model.ParseLimits::default())
-  if observed.data_len != expected.data_len ||
-    observed.header.tensors.length() != expected.header.tensors.length() {
+  // Transformation output always uses codec's canonical lexical field order.
+  // Compare against the same canonicalized snapshot rather than the original
+  // input order retained by `apply_rename_plan`.
+  let canonical = @codec.validate_layout(
+    @codec.parse_header(
+      @codec.encode_header(expected),
+      limits=@model.ParseLimits::default(),
+    ),
+    data_len=expected.data_len,
+  )
+  if observed != canonical {
     raise @model.SftkError::Conflict(
       path~,
-      message="staged renamed file failed structural verification",
+      message="staged renamed file does not match the canonical planned transformation",
     )
-  }
-  for index = 0; index < expected.header.tensors.length(); index = index + 1 {
-    let wanted = expected.header.tensors[index]
-    let actual = observed.header.tensors[index]
-    if wanted.name != actual.name ||
-      wanted.dtype != actual.dtype ||
-      wanted.shape != actual.shape ||
-      wanted.data_start != actual.data_start ||
-      wanted.data_end != actual.data_end {
-      raise @model.SftkError::Conflict(
-        path~,
-        message="staged renamed header does not match planned transformation",
-      )
-    }
   }
 }
 

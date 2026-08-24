@@ -100,6 +100,27 @@ async test "native inspect reads only header and split then merge preserves name
 }
 
 ///|
+async test "native prefix rename publishes a canonical multi-tensor header" {
+  @async.with_task_group() <| group => {
+    let root = @fs.tmpdir(prefix="sftk-rename")
+    group.add_defer(() => @fs.rmdir(root, recursive=true))
+    let source = test_path(root, "source.safetensors")
+    write_container(source, source_snapshot(), b"abcdefghi")
+    let output = test_path(root, "renamed.safetensors")
+    let options = @model.ExecutionOptions::default()
+    let plan = plan_prefix_rename_file(source, "a", "encoder.a", options)
+    execute_rename(source, output, plan, options)
+    let observed = inspect_file(output, test_limits())
+    assert_eq(
+      observed.header.tensors.map(tensor => {
+        (tensor.name, tensor.data_start, tensor.data_end)
+      }),
+      [("encoder.a", 3UL, 7UL), ("m", 7UL, 9UL), ("z", 0UL, 3UL)],
+    )
+  }
+}
+
+///|
 async test "native inspect reports a truncated prefix" {
   @async.with_task_group() <| group => {
     let root = @fs.tmpdir(prefix="sftk-truncated")
